@@ -8,6 +8,7 @@ UDP_PORT = 1234
 CONTROLLER_DEADZONE = 0.15 # Helps prevent drift from worn-out joysticks
 
 # --- Setup UDP Socket ---
+# This creates the object that will send data over the network
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_address = (ESP32_IP, UDP_PORT)
 print(f"✅ UDP client started. Will send data to {ESP32_IP}:{UDP_PORT}")
@@ -25,8 +26,7 @@ controller.init()
 print(f"✅ Controller '{controller.get_name()}' detected.")
 print("\n--- Controls ---")
 print("🕹️ Left Stick UP/DOWN: Throttle")
-print("🔘 X Button: Run sequential motor test (first-time only)")
-print("🔘 Menu Button: ARM/DISARM toggle")
+print("🔘 Menu Button: ARM/DISARM (Kill Switch)")
 print("----------------")
 print("Press Ctrl+C in this window to exit.")
 
@@ -41,19 +41,20 @@ try:
         # Pygame reads all controller events
         for event in pygame.event.get():
             if event.type == pygame.JOYBUTTONDOWN:
-                # Menu button (button 7) for ARM/DISARM toggle
+                # Menu button (button 7) for ARM/DISARM
                 if event.button == 7:
                     print("\nMENU BUTTON PRESSED - Toggling Arm State")
                     message = "SWITCH"
                     sock.sendto(message.encode(), server_address)
                 
-                # 'X' button (button 2) for Sequential Motor Test
+                # 'X' button (button 2) for Motor Test
                 if event.button == 2:
-                    print("\n'X' BUTTON PRESSED - Running Sequential Motor Test")
-                    message = "X"
+                    print("\n'X' BUTTON PRESSED - Starting Motor Test Sequence")
+                    message = "MOTEST"
                     sock.sendto(message.encode(), server_address)
 
         # --- Read Joystick and Apply Throttle Logic ---
+        
         left_stick_y = controller.get_axis(1)
         throttle = 1000
 

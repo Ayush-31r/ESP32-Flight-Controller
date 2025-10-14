@@ -8,6 +8,7 @@ ESP32_IP = "192.168.4.1"  # The IP of your ESP32 hotspot
 UDP_PORT = 1234
 CONTROLLER_DEADZONE = 0.15 # Helps prevent drift from worn-out joysticks
 
+
 # --- Setup UDP Socket ---
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_address = (ESP32_IP, UDP_PORT)

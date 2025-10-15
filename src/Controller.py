@@ -22,6 +22,8 @@ if pygame.joystick.get_count() == 0:
     print("❌ No controller detected! Please connect a controller and restart.")
     exit()
 
+    #maybe
+
 controller = pygame.joystick.Joystick(0)
 controller.init()
 print(f"✅ Controller '{controller.get_name()}' detected.")

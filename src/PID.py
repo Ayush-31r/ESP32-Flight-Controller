@@ -182,6 +182,7 @@ status_label = ttk.Label(
 )
 status_label.grid(column=0, row=current_row + 1, columnspan=2, pady=10)
 
+
 # --- Connection Info ---
 conn_label = ttk.Label(
     main_frame,

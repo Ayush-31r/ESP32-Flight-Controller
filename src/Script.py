@@ -5,6 +5,7 @@ UDP_PORT = 1234
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
+
 def send_command(cmd):
     sock.sendto(cmd.encode(), (ESP32_IP, UDP_PORT))
     print(f"Sent: {cmd}")

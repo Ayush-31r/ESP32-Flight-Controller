@@ -11,6 +11,7 @@ def send_command(cmd):
     print(f"Sent: {cmd}")
 
 # Interactive menu
+
 while True:
     print("\n=== ESC Calibration Menu ===")
     print("1. Start calibration (CALSTART)")
